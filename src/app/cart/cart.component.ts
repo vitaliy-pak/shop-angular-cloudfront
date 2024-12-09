@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
+  computed, DestroyRef,
   inject,
 } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
@@ -20,7 +20,7 @@ import {
 } from '@angular/material/stepper';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-cart',
@@ -53,6 +53,7 @@ export class CartComponent {
   private readonly fb = inject(UntypedFormBuilder);
   private readonly checkoutService = inject(CheckoutService);
   private readonly cartService = inject(CartService);
+  private destroyRef = inject(DestroyRef);
 
   products = toSignal(this.checkoutService.getProductsForCheckout(), {
     initialValue: [],
@@ -94,5 +95,9 @@ export class CartComponent {
 
   remove(id: string): void {
     this.cartService.removeItem(id);
+  }
+
+  checkout() {
+    this.checkoutService.checkout(this.shippingInfo.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }

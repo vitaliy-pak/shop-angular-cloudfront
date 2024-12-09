@@ -13,6 +13,7 @@ import {
   MatTable,
 } from '@angular/material/table';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { StatusHistory } from "./order.interface";
 
 @Component({
   selector: 'app-orders',
@@ -39,4 +40,12 @@ export class OrdersComponent {
   orders = toSignal(inject(OrdersService).getOrders(), {
     initialValue: [],
   });
+
+  getLastStatusHistory(statusHistories: StatusHistory[]): string | undefined {
+    if (!statusHistories || statusHistories.length === 0) {
+      return undefined;
+    }
+
+    return statusHistories.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0].status;
+  }
 }

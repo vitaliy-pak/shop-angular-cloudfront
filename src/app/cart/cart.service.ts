@@ -83,7 +83,7 @@ export class CartService extends ApiService {
 
   empty(): void {
     this.#cart.set({});
-    this.updateCart();
+    this.fetchCart();
   }
 
   private updateCount(id: string, type: 1 | -1): void {

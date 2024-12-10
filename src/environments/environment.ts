@@ -8,10 +8,10 @@ export const environment: Config = {
   production: false,
   apiEndpoints: {
     product: 'https://nb8rmwa8bc.execute-api.us-east-1.amazonaws.com/prod/',
-    order: 'http://localhost:3000/orders',
+    order: 'https://rkbn718t12.execute-api.us-east-1.amazonaws.com/prod/orders',
     import: 'https://rcym8yqo3i.execute-api.us-east-1.amazonaws.com/prod/',
     bff: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    cart: 'http://localhost:3000/cart',
+    cart: 'https://rkbn718t12.execute-api.us-east-1.amazonaws.com/prod/cart',
   },
   apiEndpointsEnabled: {
     product: true,

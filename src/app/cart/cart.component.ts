@@ -21,6 +21,7 @@ import {
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -53,6 +54,7 @@ export class CartComponent {
   private readonly fb = inject(UntypedFormBuilder);
   private readonly checkoutService = inject(CheckoutService);
   private readonly cartService = inject(CartService);
+  private readonly router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   products = toSignal(this.checkoutService.getProductsForCheckout(), {
@@ -98,6 +100,9 @@ export class CartComponent {
   }
 
   checkout() {
-    this.checkoutService.checkout(this.shippingInfo.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.checkoutService.checkout(this.shippingInfo.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      this.cartService.empty();
+      this.router.navigate(['']);
+    });
   }
 }

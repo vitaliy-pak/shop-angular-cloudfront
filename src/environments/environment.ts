@@ -8,17 +8,17 @@ export const environment: Config = {
   production: false,
   apiEndpoints: {
     product: 'https://nb8rmwa8bc.execute-api.us-east-1.amazonaws.com/prod/',
-    order: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
+    order: 'https://rkbn718t12.execute-api.us-east-1.amazonaws.com/prod/orders',
     import: 'https://rcym8yqo3i.execute-api.us-east-1.amazonaws.com/prod/',
     bff: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    cart: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
+    cart: 'https://rkbn718t12.execute-api.us-east-1.amazonaws.com/prod/cart',
   },
   apiEndpointsEnabled: {
     product: true,
-    order: false,
+    order: true,
     import: true,
     bff: false,
-    cart: false,
+    cart: true,
   },
 };
 
